@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
         splitScreenMode: true,
         builder: (context, child) {
           return GetMaterialApp(
-            home: TableSearchresults(),
+            home: SplashScrren(),
             debugShowCheckedModeBanner: false,
           );
         });

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class BackgroundScreen extends StatelessWidget {
   var body;
@@ -16,12 +17,16 @@ class BackgroundScreen extends StatelessWidget {
             alignment: Alignment.topRight,
             child: (Image(
               image: AssetImage("assets/images/Accounttop1.png"),
+              fit: BoxFit.fitWidth,
+              width: Get.width,
             )),
           ), //w
           Align(
-            alignment: Alignment.bottomRight,
+            alignment: Alignment.bottomCenter,
             child: (Image(
               image: AssetImage("assets/images/bottom2.png"),
+              fit: BoxFit.fitWidth,
+              width: Get.width,
             )),
           ), //want to fixed widget when keyboard will appear
           SafeArea(

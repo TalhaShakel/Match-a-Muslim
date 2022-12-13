@@ -1,4 +1,5 @@
 import 'package:dating_app/Constant/ColorConstant.dart';
+import 'package:dating_app/Controllers/Maincontrollers.dart';
 import 'package:dating_app/HomeMenu/ChatScreen.dart';
 import 'package:dating_app/HomeMenu/MainSearchScreen.dart';
 import 'package:dating_app/HomeMenu/MyProfileScreen.dart';
@@ -11,70 +12,93 @@ import 'package:get/get.dart';
 
 class MenuScreen extends StatelessWidget {
   MenuScreen({super.key});
+  var controller = Get.put(MainController());
 
-  int _selectIndex = 0;
+  // int _selectIndex = 0;
   static List<Widget> _widgetOptions = <Widget>[
     HomeMenuScreen(),
     MyRequestScreen(),
     MainSearchScreen(),
     ChatScreen(),
-    MyProfileScreen()
+    MyProfileM()
   ];
-
-  
 
   @override
   Widget build(BuildContext context) {
     Get.put(CountController());
-    return Scaffold(
-      ///////////////////////////////////////////////////
-      body: _widgetOptions.elementAt(_selectIndex),
-      bottomNavigationBar: BottomNavigationBar(
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.home,
-              // color: Color(0xff08296c),
-              color: ColorConstants.primaryDarkColor,
+    return GetBuilder<MainController>(builder: (controller) {
+      return Scaffold(
+        ///////////////////////////////////////////////////
+        body: _widgetOptions[controller.index],
+        bottomNavigationBar: BottomNavigationBar(
+          items: <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              label: "",
+              icon: GestureDetector(
+                  onTap: () {
+                    controller.pages(0);
+                  },
+                  child: Container(
+                    child: Image.asset("assets/images/Vector (1).png"),
+                  )
+                  //  Icon(
+                  //  Image.asset(name)
+                  //   // color: Color(0xff08296c),
+                  //   color: ColorConstants.primaryDarkColor,
+                  // ),
+                  ),
+              // label: 'DashBoard',
             ),
-            // label: 'DashBoard',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.settings,
-              color: ColorConstants.primaryDarkColor,
+            BottomNavigationBarItem(
+              label: "",
+              icon: GestureDetector(
+                onTap: () {
+                  controller.pages(1);
+                },
+                child:
+                    Image.asset("assets/images/clipboard-search-outline 1.png"),
+              ),
+              // label: 'Setting',
             ),
-            // label: 'Setting',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.settings,
-              color: ColorConstants.primaryDarkColor,
+            BottomNavigationBarItem(
+              label: "",
+              icon: GestureDetector(
+                onTap: () {
+                  controller.pages(2);
+                },
+                child: Image.asset("assets/images/Vector.png"),
+              ),
+              // label: 'Setting',
             ),
-            // label: 'Setting',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.settings,
-              color: ColorConstants.primaryDarkColor,
+            BottomNavigationBarItem(
+              label: "",
+              icon: GestureDetector(
+                onTap: () {
+                  controller.pages(3);
+                },
+                child: Image.asset("assets/images/Vector (2).png"),
+              ),
+              // label: 'Setting',
             ),
-            // label: 'Setting',
-          ),
-          /////////////////////////////////////
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.person,
-              color: ColorConstants.primaryDarkColor,
+            /////////////////////////////////////
+            BottomNavigationBarItem(
+              label: "",
+              icon: GestureDetector(
+                onTap: () {
+                  controller.pages(4);
+                },
+                child: Image.asset("assets/images/Vector (3).png"),
+              ),
+              // label: 'My Profile',
             ),
-            // label: 'My Profile',
-          ),
-          ///////////////////////////////////
-        ],
-        currentIndex: _selectIndex,
-        selectedItemColor: ColorConstants.textFormBackGColor,
-        // onTap: Get.find(),
-      ),
-    );
+            ///////////////////////////////////
+          ],
+          currentIndex: controller.index,
+          selectedItemColor: ColorConstants.textFormBackGColor,
+          // onTap: Get.find(),
+        ),
+      );
+    });
   }
 }
 
