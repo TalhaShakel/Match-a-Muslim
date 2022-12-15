@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:dating_app/Constant/TextFormField.dart';
 import 'package:dating_app/HomeMenu/MainSearchResults.dart';
 import 'package:dating_app/HomeMenu/MainSearchScreen.dart';
@@ -18,6 +16,7 @@ import 'package:dating_app/Screens/TableNumSelection.dart';
 import 'package:dating_app/Splash%20Screen/SplashScreen.dart';
 import 'package:dating_app/Widgets/Background.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -25,15 +24,18 @@ import 'firebase_options.dart';
 
 void main() async {
 // ...
+  WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final Future<FirebaseApp> _initilization =
+      Firebase.initializeApp(); //firebase
+  MyApp({super.key});
 
   // This widget is the root of your application.
   @override
@@ -44,7 +46,8 @@ class MyApp extends StatelessWidget {
         splitScreenMode: true,
         builder: (context, child) {
           return GetMaterialApp(
-            home: SplashScrren(),
+            builder: EasyLoading.init(),
+            home: TableSearchresults(),
             debugShowCheckedModeBanner: false,
           );
         });

@@ -1,4 +1,7 @@
 import 'package:dating_app/Constant/ColorConstant.dart';
+import 'package:dating_app/Controllers/Maincontrollers.dart';
+import 'package:dating_app/HomeMenu/MenuIconsScreen.dart';
+import 'package:dating_app/Models/Service.dart';
 import 'package:dating_app/Screens/ProfileScreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -9,10 +12,15 @@ import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class GenderSelectionScreen extends StatelessWidget {
-  const GenderSelectionScreen({super.key});
+  GenderSelectionScreen({super.key});
+
+  String man = "man";
+  String women = "women";
 
   @override
   Widget build(BuildContext context) {
+    var controller = Get.put(MainController());
+
     return Scaffold(
       body: Container(
         color: Colors.white,
@@ -41,53 +49,71 @@ class GenderSelectionScreen extends StatelessWidget {
                   fontSize: 32.sp),
             ),
             20.heightBox,
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Container(
-                    height: 143.h,
-                    width: 138.w,
-                    decoration: BoxDecoration(
-                      color: ColorConstants.primaryDarkColor,
-                      borderRadius: BorderRadius.all(Radius.circular(35)),
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Image.asset("assets/images/VectorF.png"),
-                        Text(
-                          "Women",
-                          style: TextStyle(
-                              color: Colors.white,
-                              decoration: TextDecoration.none,
-                              fontWeight: FontWeight.w700,
-                              fontSize: 24.sp),
-                        )
-                      ],
-                    )),
-                Container(
-                    height: 143,
-                    width: 138,
-                    decoration: BoxDecoration(
-                      color: ColorConstants.SecondaryColor,
-                      borderRadius: BorderRadius.all(Radius.circular(35)),
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Image.asset("assets/images/VectorM.png"),
-                        Text(
-                          "Man",
-                          style: TextStyle(
-                              color: Colors.white,
-                              decoration: TextDecoration.none,
-                              fontWeight: FontWeight.w700,
-                              fontSize: 24.sp),
-                        )
-                      ],
-                    )),
-              ],
-            ),
+            GetBuilder<MainController>(builder: (controller) {
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      controller.isgender(women);
+                    },
+                    child: Container(
+                        height: 143.h,
+                        width: 138.w,
+                        decoration: BoxDecoration(
+                          color: controller.check == women
+                              ? ColorConstants.primaryDarkColor
+                              : ColorConstants.SecondaryColor,
+                          borderRadius: BorderRadius.all(Radius.circular(35)),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Image.asset("assets/images/VectorF.png"),
+                            Text(
+                              "${women}",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  decoration: TextDecoration.none,
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 24.sp),
+                            )
+                          ],
+                        )),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      controller.isgender(man);
+                      // Get.appUpdate();
+                      // controller.check = ;
+                    },
+                    child: Container(
+                        height: 143,
+                        width: 138,
+                        decoration: BoxDecoration(
+                          color: controller.check == man
+                              ? ColorConstants.primaryDarkColor
+                              : ColorConstants.SecondaryColor,
+                          borderRadius: BorderRadius.all(Radius.circular(35)),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Image.asset("assets/images/VectorM.png"),
+                            Text(
+                              "${man}",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  decoration: TextDecoration.none,
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 24.sp),
+                            )
+                          ],
+                        )),
+                  ),
+                ],
+              );
+            }),
             ///////////////
             10.heightBox,
             Image.asset("assets/images/mainlogo.png"),
@@ -96,7 +122,14 @@ class GenderSelectionScreen extends StatelessWidget {
               width: 264.w,
               child: ElevatedButton(
                 onPressed: () {
-                  Get.to(() => ProfileCreationScreen());
+                  if (controller.check == "man" ||
+                      controller.check == "women") {
+                    firestore_update("user", currentUserData.uid,
+                        {"gender": controller.check});
+                    Get.to(() => ProfileCreationScreen());
+                  } else {
+                    Get.snackbar("Please select your gender", "");
+                  }
                 },
                 child: Text(
                   "Continue",

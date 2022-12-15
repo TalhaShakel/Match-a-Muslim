@@ -1,4 +1,6 @@
 import 'package:dating_app/Constant/ColorConstant.dart';
+import 'package:dating_app/HomeMenu/MenuIconsScreen.dart';
+import 'package:dating_app/HomeMenu/homeMenu.dart';
 import 'package:dating_app/Screens/SearchResutsScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -13,89 +15,84 @@ class InitialSearchScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        color: Colors.white,
-        child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Container(
-                width: 390.w,
-                height: 200.h,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage(
-                      "assets/images/GStop.png",
-                    ),
-                    fit: BoxFit.fitWidth,
+      body: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Container(
+              width: 390.w,
+              height: 200.h,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage(
+                    "assets/images/GStop.png",
                   ),
+                  fit: BoxFit.fitWidth,
                 ),
               ),
+            ),
 
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 18.h),
-                    child: Text(
-                      "Find the person you'd like to speak to",
-                      style: TextStyle(
-                          color: Colors.black,
-                          decoration: TextDecoration.none,
-                          fontWeight: FontWeight.w700,
-                          fontSize: 18.sp),
-                    ),
-                  ),
-                  40.heightBox,
-
-                  Center(
-                    child: Container(
-                        height: 41.h,
-                        width: 233.w,
-                        child: Simpletextfield("Search with name or guest no")),
-                  ),
-                  35.heightBox,
-                  Center(child: Image.asset("assets/images/mainlogo.png")),
-                  35.heightBox,
-
-                  GestureDetector(
-                    onTap: () {
-                      Get.to(SearchResultScreen());
-                    },
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        "Skip"
-                            .text
-                            .size(20.sp)
-                            .fontWeight(FontWeight.w400)
-                            .black
-                            .make(),
-                        Icon(
-                          Icons.arrow_right_alt_rounded,
-                          size: 30,
-                        ),
-                      ],
-                    ),
-                  )
-
-                  ///////////////////////////
-                ],
-              ),
-
-              /////////////////////
-              Expanded(
-                child: Container(
-                  width: Get.width,
-                  // margin: EdgeInsets.only(top: 20),
-                  child: Image(
-                    image: AssetImage('assets/images/GSbg.PNG'),
-                    fit: BoxFit.fitWidth,
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 18.h),
+                  child: Text(
+                    "Find the person you'd like to speak to",
+                    style: TextStyle(
+                        color: Colors.black,
+                        decoration: TextDecoration.none,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 18.sp),
                   ),
                 ),
-              )
-            ]),
-      ),
+                40.heightBox,
+
+                Center(
+                  child: Container(
+                      height: 41.h,
+                      width: 233.w,
+                      child: Simpletextfield("Search with name or guest no")),
+                ),
+                35.heightBox,
+                Center(child: Image.asset("assets/images/mainlogo.png")),
+                35.heightBox,
+
+                GestureDetector(
+                  onTap: () {
+                    Get.to(() => MenuScreen());
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      "Skip"
+                          .text
+                          .size(20.sp)
+                          .fontWeight(FontWeight.w400)
+                          .black
+                          .make(),
+                      Icon(
+                        Icons.arrow_right_alt_rounded,
+                        size: 30,
+                      ),
+                    ],
+                  ),
+                )
+
+                ///////////////////////////
+              ],
+            ),
+
+            /////////////////////
+            Container(
+              width: Get.width,
+              // margin: EdgeInsets.only(top: 20),
+              child: Image(
+                image: AssetImage('assets/images/GSbg.PNG'),
+                fit: BoxFit.fitWidth,
+              ),
+            )
+          ]),
     );
   }
 

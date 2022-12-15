@@ -15,21 +15,15 @@ class MenuScreen extends StatelessWidget {
   var controller = Get.put(MainController());
 
   // int _selectIndex = 0;
-  static List<Widget> _widgetOptions = <Widget>[
-    HomeMenuScreen(),
-    MyRequestScreen(),
-    MainSearchScreen(),
-    ChatScreen(),
-    MyProfileM()
-  ];
+  // ignore: prefer_final_fields
 
   @override
   Widget build(BuildContext context) {
-    Get.put(CountController());
+    var controller = Get.put(MainController());
     return GetBuilder<MainController>(builder: (controller) {
       return Scaffold(
         ///////////////////////////////////////////////////
-        body: _widgetOptions[controller.index],
+        body: controller.page[controller.index],
         bottomNavigationBar: BottomNavigationBar(
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
@@ -99,13 +93,5 @@ class MenuScreen extends StatelessWidget {
         ),
       );
     });
-  }
-}
-
-class CountController extends GetxController {
-  final _selectedIndex = 0.obs;
-
-  void _onItemTapped(int index, _selectIndex) {
-    _selectIndex = index;
   }
 }

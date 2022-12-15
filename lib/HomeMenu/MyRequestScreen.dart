@@ -57,10 +57,56 @@ class MyRequestScreen extends StatelessWidget {
           ),
           10.h.heightBox,
 
-          _myrequstPersonC(),
+          ///////////////////////
+
+          Builder(
+            builder: (context) {
+              return GestureDetector(
+                onTap: () {
+                  Get.to(() => GuestProfileScreen());
+                },
+                child: Container(
+                  height: 62.h,
+                  width: 335.w,
+                  decoration: BoxDecoration(
+                    border: Border.all(width: 1, color: Colors.black),
+                    color: ColorConstants.textFormBackGColor,
+                    borderRadius: BorderRadius.all(Radius.circular(15)),
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.person,
+                          size: 35,
+                          color: ColorConstants.primaryDarkColor,
+                        ),
+                        10.w.widthBox,
+                        "Ibraheem"
+                            .text
+                            .size(24.sp)
+                            .fontWeight(FontWeight.w500)
+                            .black
+                            .make(),
+                        110.w.widthBox,
+                        "#42"
+                            .text
+                            .size(24.sp)
+                            .fontWeight(FontWeight.w500)
+                            .black
+                            .make(),
+                      ],
+                    ),
+                  ),
+                ),
+              );
+            }
+          ),
+
           20.h.heightBox,
-          _myrequstPersonC(),
-          40.h.heightBox,
+          // _myrequstPersonC(),
+          // 40.h.heightBox,
           ////////////////////
           Center(
             child: GestureDetector(
@@ -101,7 +147,7 @@ class MyRequestScreen extends StatelessWidget {
       height: 62.h,
       width: 335.w,
       decoration: BoxDecoration(
-        border: Border.all(width: 3, color: Colors.black),
+        border: Border.all(width: 1, color: Colors.black),
         color: ColorConstants.textFormBackGColor,
         borderRadius: BorderRadius.all(Radius.circular(15)),
       ),
